@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="image/logo.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="js/main.js"></script>
+    <script src="js/vandongvien.js"></script>
+    <script>
+        window.onload = function(){
+            loadHoSoVdv();
+        }
+    </script>
+</head>
+<body>
+<div class="navleft" id="navleft"></div>
+<div class="contentweb">
+<div class="headerweb" id="headerweb"></div>
+<div class="contentmain row">
+<div class="col-sm-3">
+    <div class="blockinfor blockleft">
+        <img src="" class="avataruser" id="avataruser">
+        <h5 id="hotenuser" class="hotenuser"></h5>
+        <span id="sodienthoaiuser" class="sodienthoaiuser"></span>
+        <span class="sodienthoaiuser"><i class="fa fa-envelope"></i> <span id="mailuser"></span></span>
+        <hr>
+        <a id="btnsendmail" target="_blank" class="form-control btn btn-primary"><i class="fa fa-envelope"></i> Gửi mail</a>
+    </div>
+</div>
+<div class="col-sm-9">
+    <div class="blockinfor blockright">
+        <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1" role="tab" aria-controls="ex1-tabs-1" aria-selected="true" >Lịch tập</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ex1-tab-2" data-bs-toggle="tab" href="#ex1-tabs-2" role="tab" aria-controls="ex1-tabs-2"aria-selected="false">Trấn thương</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ex1-tab-3" data-bs-toggle="tab" href="#ex1-tabs-3" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">Sức khỏe</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ex1-tab-4" data-bs-toggle="tab" href="#ex1-tabs-4" role="tab" aria-controls="ex1-tabs-4" aria-selected="false">Giải đấu</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="ex1-content">
+            <div class="tab-pane fade show active"id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1" >
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="lb-form">Từ ngày</label>
+                        <input id="start" type="date" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="lb-form">Đến ngày</label>
+                        <input id="end" type="date" class="form-control">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="lb-form">&ThinSpace;</label>
+                        <button onclick="loadLichByNgay()" class="btn btn-primary form-control"><i class="fa fa-filter"></i> Lọc</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <i class="fas fa-running iconsoluong" id="tongbuoitap"> 5</i>
+                        <span class="lbusers">Tổng buổi tập</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <i class="fas fa-check iconsoluong green" id="datap"> 5</i>
+                        <span class="lbusers">Đã tập</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <i class="fas fa-clock iconsoluong red" id="dimuon"> 5</i>
+                        <span class="lbusers">Đi muộn</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <i class="fas fa-remove iconsoluong yellow" id="nghi"> 5</i>
+                        <span class="lbusers">Nghỉ</span>
+                    </div>
+                </div>
+                <table class="table table-borderless" style="margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th>Ngày</th>
+                            <th>Chi tiết</th>
+                            <th>Phản hồi</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listlichtap">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ngày trấn thương</th>
+                            <th>Vị trí</th>
+                            <th>Mức độ nghiêm trọng</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listTranthuong">
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ngày tạo</th>
+                            <th>Chiều cao/<br>Cân nặng</th>
+                            <th>Huyết áp</th>
+                            <th>Nhịp tim</th>
+                            <th>Mức độ<br>stress</th>
+                            <th>Chỉ số đường huyết</th>
+                            <th>Thể lực/ phân loại</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listhosoupdate">
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tên giải đấu</th>
+                            <th>Ngày đăng ký</th>
+                            <th>Ngày thi đấu</th>
+                            <th>Mô tả</th>
+                            <th>Chuyên môn</th>
+                            <th>Kết quả</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listgiaidau">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</body>
+
+<div id="divdoimk"></div>
+<script>
+    $('#example').DataTable();
+</script>
+</html>

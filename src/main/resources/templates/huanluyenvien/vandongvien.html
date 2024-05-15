@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="image/logo.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="js/main.js"></script>
+    <script src="js/vandongvien.js"></script>
+    <script src="js/kehoach.js"></script>
+    <script>
+        window.onload = function(){
+            loadAllVdv();
+        }
+    </script>
+</head>
+<body>
+    <div class="navleft" id="navleft"></div>
+    <div class="contentweb">
+        <div class="headerweb" id="headerweb"></div>
+        <div class="contentmain">
+            <div class="tablediv">
+                <div class="headertable">
+                    <span class="lbtable">Danh sách vận động viên của bạn</span>
+                </div>
+                <div class="divcontenttable">
+                    <table id="example" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Ảnh</th>
+                                <th>Email</th>
+                                <th>Họ tên</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày tạo</th>
+                                <th>Bộ môn</th>
+                                <th>Kế hoạch</th>
+                                <th>Hồ sơ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listvdv">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<div id="divdoimk"></div>
+<div class="modal fade" id="modalchitietvdv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Chi tiết vận động viên</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body row">
+                <div class='col-sm-3'>
+                    <div class='imgdivavt'>
+                        <img class='avataracc' id="avataracc" src=""/>
+                    </div>
+                </div>
+                <div class='col-sm-9 row'>
+                    <div class='col-sm-4'>
+                        <label class="lb-form">Họ và tên</label>
+                        <div class='blockcccd' id="hoten"></div>
+                        <label class="lb-form">Email</label>
+                        <div class='blockcccd'id="email"></div>
+                        <label class="lb-form">Số điện thoại</label>
+                        <div class='blockcccd' id="phone"></div>
+                    </div>
+                    <div class='col-sm-4'>
+                        <label class="lb-form">Địa chỉ</label>
+                        <div class='blockcccd' id="diachi"></div>
+                        <label class="lb-form">Giới tính</label>
+                        <div class='blockcccd' id="gioitinh"></div>
+                        <label class="lb-form">Ngày sinh</label>
+                        <div class='blockcccd' id="ngaysinh"></div>
+                    </div>
+                    <div class='col-sm-4'>
+                        <label class="lb-form">Chiều cao</label>
+                        <div class='blockcccd' id="chieucao"></div>
+                        <label class="lb-form">Cân nặng</label>
+                        <div class='blockcccd' id="cannang"></div>
+                        <label class="lb-form">Chuyên môn</label>
+                        <div class='blockcccd' id="chuyenmon"></div>
+                    </div>
+                    <div class='col-sm-12'>
+                        <div class='blockcccd' style="margin-top: 30px;"><h5>Mô tả vận động viên</h5></div>
+                        <div id="motavdv">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalkehoachhl" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Kế hoạch huấn luyện</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body row">
+                <div class="col-sm-8">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Tên kế hoạch</th>
+                                <th>Trạng thái</th>
+                                <th>Vận động viên</th>
+                                <th class="sticky-col">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listkehoachtl">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <label class="lb-form">Tên kế hoạch</label>
+                    <input id="idkh" type="hidden" class="form-control">
+                    <input id="tenkhtl" class="form-control">
+                    <br>
+                    <label class="checkbox-custom"> Đã hoàn thành
+                    <input id="trangthaiht" type="checkbox">
+                    <span class="checkmark-checkbox"></span><br>
+
+                    <div style="margin-top: 30px;">
+                        <button onclick="themKeHoach()" class="btn btn-primary">Thêm/cập nhật</button>
+                        <button onclick="lamMoi()" class="btn btn-primary">Làm mới</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#example').DataTable();
+</script>
+</html>
