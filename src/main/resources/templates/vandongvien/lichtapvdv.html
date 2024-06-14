@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="image/logo.ico">
@@ -35,6 +36,7 @@
             loadBangByKeHoach(currentMonth, currentYear);
         }
     </script>
+    <title>Lịch tập của tôi</title>
 </head>
 <body>
     <div class="navleft" id="navleft"></div>
@@ -106,7 +108,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Phản hồi buổi tập</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Phản hồi buổi tập (Bởi vận động viên)</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -114,7 +116,7 @@
             <textarea class="form-control" id="noidungphanhoi"></textarea>
             <input type="hidden" id="idlictap">
 
-            <label class="lb-form">Thang điểm</label>
+            <label class="lb-form">Bạn có thích buổi tập này không?</label>
             <select class="form-control" id="thangdiem">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -127,6 +129,12 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select>
+            <label class="lb-form">Buổi tập này đối với bạn có khó không?(về mặt vật lý)</label>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="10" value="1" class="slider" id="myRange">
+                <p>Value: <span id="demo"></span></p>
+            </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -149,5 +157,14 @@
         var kehoach = document.getElementById("kehoachselect").value
         window.location.href = 'lichtapvdv?vdv='+vdv+'&kehoach='+kehoach
     }
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    }
+
+
 </script>
 </html>

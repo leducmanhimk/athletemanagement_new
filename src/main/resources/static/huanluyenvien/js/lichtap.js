@@ -47,25 +47,32 @@ function locBangVdv(){
     loadBangByKeHoach(month,year)
 }
 
+
+const statusColors = {
+    "pending": "orange",
+    "completed": "green",
+    "cancelled": "red",
+    // ... Thêm ánh xạ trạng thái-màu sắc
+};
 async function loadBang(month, year){
-    var numday = daysInMonth(month, year);
-    var arr = [];
+    const numday = daysInMonth(month, year);
+    const arr = [];
     if(month < 10){
         month = '0'+month;
     }
 
     for(i=1; i<= numday ; i++){
-        var thu = getDayOfWeek(year+"-"+month+"-"+i);
-        var x = i;
+        const thu = getDayOfWeek(year + "-" + month + "-" + i);
+        let x = i;
         if(i<10){
             x = '0'+i;
         }
-        var obj = {
-            "thu":thu,
-            "ngay":year+"-"+month+"-"+x,
-            "ngaytuan":i,
-            "colich":false
-        }
+        const obj = {
+            "thu": thu,
+            "ngay": year + "-" + month + "-" + x,
+            "ngaytuan": i,
+            "colich": false
+        };
         arr.push(obj)
     }
 
@@ -111,8 +118,8 @@ async function loadBang(month, year){
 
 
 async function loadBangByKeHoach(month, year){
-    var numday = daysInMonth(month, year);
-    var arr = [];
+    const numday = daysInMonth(month, year);
+    const arr = [];
     if(month < 10){
         month = '0'+month;
     }
@@ -146,7 +153,7 @@ async function loadBangByKeHoach(month, year){
 
     for(i=0; i< arr.length; i++){
         for(j=0; j<list.length; j++){
-            if(arr[i].ngay == list[j].workoutDate){
+            if(arr[i].ngay === list[j].workoutDate){
                 arr[i].colich = true;
             }
         }
@@ -357,10 +364,10 @@ async function loadALichTap() {
 
 async function loadPhanHoi() {
     $('#example').DataTable().destroy();
-    var url = 'http://localhost:8080/api/schedule/coach/fin-feedback-by-date';
-    var start = document.getElementById("start").value
-    var end = document.getElementById("end").value
-    if (start != "" && end != "") {
+    let url = 'http://localhost:8080/api/schedule/coach/fin-feedback-by-date';
+    const start = document.getElementById("start").value;
+    const end = document.getElementById("end").value;
+    if (start !== "" && end !== "") {
         url += '?from=' + start + '&to=' + end;
     }
     const response = await fetch(url, {
@@ -369,19 +376,20 @@ async function loadPhanHoi() {
             'Authorization': 'Bearer ' + token
         })
     });
-    var list = await response.json();
-    console.log(list)
-    var main = '';
+    const list = await response.json();
+    console.log(list);
+    let main = '';
     for (i = 0; i < list.length; i++) {
-        var nd = '';
+        let nd = '';
         for(j=0; j<list[i].exerciseSchedules.length; j++){
             nd += list[i].exerciseSchedules[j].exercise.name+`: `+ list[i].exerciseSchedules[j].quantity+"<br>"
         }
         main += `<tr>
+                    
                     <td>${list[i].feedBackDate}</td>
                     <td>${list[i].workoutDate}</td>
                     <td>${nd}</td>
-                    <td>${list[i].mark}</td>
+                    <td>${list[i].feedBack}</td>
                     <td>${list[i].mark}</td>
                     <td>${list[i].plan.athlete.user.fullName}<br>${list[i].plan.athlete.user.email}</td>
                 </tr>`
