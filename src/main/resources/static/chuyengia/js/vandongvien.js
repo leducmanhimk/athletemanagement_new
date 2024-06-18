@@ -1,5 +1,5 @@
 async function loadAllVdv() {
-    $('#example').DataTable().destroy();
+    $('#TableAtheles').DataTable().destroy();
     var url = 'http://localhost:8080/api/athlete/expert/get-all';
     const response = await fetch(url, {
         method: 'GET',
@@ -27,7 +27,21 @@ async function loadAllVdv() {
                 </tr>`
     }
     document.getElementById("listvdv").innerHTML = main
-    $('#example').DataTable();
+    $('#TableAtheles').DataTable({
+        layout: {
+            topStart: {
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            }
+        },
+        language: {
+            // Customize language strings (optional)
+            searchPlaceholder: "Tìm kiếm...", // Example: Change search placeholder text
+            paginate: {
+                previous: "Trước",
+                next: "Sau"
+            }
+        }
+    });
 }
 
 async function loadHoSoUpdate(id) {

@@ -26,7 +26,7 @@ async function loadAllThuChi() {
                     <td>
                         <i onclick="deleteThuChi(${list[i].id})" class="fa fa-trash icontable"></i>
                         <a href="addthuchi?id=${list[i].id}"><i class="fa fa-edit icontable"></i></a>
-                        <a target="_blank" href="${list[i].bill}"><i class="fa fa-eye icontable"></i></a>
+                        ${list[i].bill == null || list[i].bill == "" ?'':`<a target="_blank" href="${list[i].bill}"><i class="fa fa-eye icontable"></i></a>`}
                     </td>
                 </tr>`
     }
