@@ -28,7 +28,10 @@
     <script src="js/lichtap.js"></script>
     <script>
         window.onload = function(){
-            loadBang(4, 2024);
+            const currentDate = new Date();
+            const currentMonth = currentDate.getMonth() + 1;
+            const currentYear = currentDate.getFullYear();
+            loadBang(currentMonth, currentYear);
         }
     </script>
 </head>
@@ -91,6 +94,27 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Phản hồi buổi tập</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label class="lb-form">Nội dung phản hồi</label>
+                    <div id="noidungphanhoi"></div>
+
+                    <label class="lb-form">Thang điểm: <span id="thangdiem"></span></label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button onclick="capNhatFeedBack()" class="btn btn-primary">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 <div id="divdoimk"></div>
 

@@ -56,4 +56,10 @@ public class AdminController {
     public String vandongvien() {
         return "admin/vandongvien.html";
     }
+
+    @RequestMapping(value = {"/hoso"}, method = RequestMethod.GET)
+    public String hoso() {
+        return "admin/hoso.html";
+    }
+
 }

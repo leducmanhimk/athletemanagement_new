@@ -237,25 +237,42 @@ async function setIdPhanHoi(id){
 }
 
 async function capNhatPhanHoi() {
-    var id = document.getElementById("idlichtap").value;
-    var noidung = document.getElementById("phanhoind").value;
+    try {
+        // Get input values
+        const id = document.getElementById("idlichtap").value;
+        const noidung = document.getElementById("phanhoind").value;
+        const thangdiem = document.getElementById("thangdiem").value;
 
-    var url = 'http://localhost:8080/api/schedule/athlete/update-feedback?id='+id;
-    const res = await fetch(url, {
-        method: 'POST',
-        headers: new Headers({
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'text/plain'
-        }),
-        body: noidung
-    });
-    var result = await res.json();
-    if (res.status < 300) {
-        toastr.success("Cập nhật thành công");
-        document.getElementById("phanhoidiv"+id).innerHTML = result.feedBack
-        $("#exampleModal").modal('hide')
-    }
-    if (res.status == exceptionCode) {
-        toastr.error(result.defaultMessage);
+        // Construct the URL
+        const url = `http://localhost:8080/api/schedule/athlete/update-feedback?id=${id}`;
+
+        // Fetch data with POST request
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: new Headers({
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'text/plain'
+            }),
+            body: noidung
+        });
+
+        // Check response status
+        if (res.ok) {
+            const result = await res.json();
+            toastr.success("Cập nhật thành công");
+            // Update DOM element only if feedback is present in the response
+            if (result.feedBack) {
+                document.getElementById("phanhoidiv" + id).innerHTML = result.feedBack;
+            }
+            $("#exampleModal").modal('hide');
+        } else {
+            // Handle non-2xx status codes
+            const errorData = await res.json();
+            const errorMessage = errorData.defaultMessage || 'Lỗi cập nhật phản hồi.';
+            toastr.error(errorMessage);
+        }
+    } catch (error) {
+        console.error('Error updating feedback:', error);
+        toastr.error('Không thể cập nhật phản hồi. vì buổi tập nghỉ hoặc quá hạn');
     }
 }

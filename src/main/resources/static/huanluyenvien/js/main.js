@@ -72,8 +72,8 @@ $( document ).ready(function() {
 });
 
 function dangXuat(){
-    window.sessionStorage.removeItem('user')
-    window.sessionStorage.removeItem('token')
+    window.localStorage.removeItem('user')
+    window.localStorage.removeItem('token')
     window.location.replace('../login');
 }
 
@@ -114,10 +114,10 @@ async function changePassword() {
         toastr.warning(result.defaultMessage);
     }
 }
-sessionStorage.test = true
+localStorage.test = true
 async function checkroleCoach() {
     if(token == null){
-        window.location.href = '../login'
+        window.location.href = '/login'
         return;
     }
     var url = 'http://localhost:8080/api/user/coach/check-role-coach';
@@ -128,7 +128,7 @@ async function checkroleCoach() {
         })
     });
     if (response.status > 300) {
-        window.location.href = '../login'
+        window.location.href = '/login'
     }
 }
 

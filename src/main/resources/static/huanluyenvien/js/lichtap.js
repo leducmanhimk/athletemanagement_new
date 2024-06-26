@@ -381,7 +381,7 @@ async function loadPhanHoi() {
                     <td>${list[i].feedBackDate}</td>
                     <td>${list[i].workoutDate}</td>
                     <td>${nd}</td>
-                    <td>${list[i].mark}</td>
+                    <td>${list[i].feedBack}</td>
                     <td>${list[i].mark}</td>
                     <td>${list[i].plan.athlete.user.fullName}<br>${list[i].plan.athlete.user.email}</td>
                 </tr>`

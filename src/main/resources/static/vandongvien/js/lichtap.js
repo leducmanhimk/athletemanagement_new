@@ -132,9 +132,13 @@ async function lichTapTheoNgay(date) {
         <td>${list[i].plan.athlete.user.fullName}<br>${list[i].plan.athlete.user.phone}</td>
         <td>${list[i].startTime} - ${list[i].endTime}</td>
         <td>${noidung}</td>
+       
         <td>
-            <a onclick="loadNoiDung(${list[i].id},'${list[i].feedBack}',${list[i].mark})" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#"><i class="fa fa-comment icontable"></i></a>
+        
+            <a onclick="loadNoiDung(${list[i].id},'${list[i].feedBack}',${list[i].mark})" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#"><i class="fa fa-comment icontable"></i>
+            </a>
         </td>
+        
     </tr>`
     }
     document.getElementById("listvdvlichtap").innerHTML = main
@@ -148,31 +152,43 @@ function loadNoiDung(idlichtap, noidung, thangdiem){
 
 var dateup = '';
 async function capNhatFeedBack() {
-    var idlichtap = document.getElementById("idlictap").value
-    var noidung = document.getElementById("noidungphanhoi").value
-    var thangdiem = document.getElementById("thangdiem").value
-    var url = 'http://localhost:8080/api/schedule/athlete/update-feedback?id=' + idlichtap+'&mark='+thangdiem;
-    const res = await fetch(url, {
-        method: 'POST',
-        headers: new Headers({
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'text/plain'
-        }),
-        body: noidung
-    });
-    if (res.status < 300) {
-        toastr.success("Đã gửi phản hổi thành công");
-        $("#exampleModal").modal('hide')
-        lichTapTheoNgay(dateup);
-    }
-    else{
-        if (res.status == exceptionCode) {
-            var result = await res.json()
-            toastr.warning(result.defaultMessage);
+    try {
+        // Get input values
+        const id = document.getElementById("idlichtap").value;
+        const noidung = document.getElementById("phanhoind").value;
+        const thangdiem = document.getElementById("thangdiem").value;
+
+        // Construct the URL
+        const url = `http://localhost:8080/api/schedule/athlete/update-feedback?id=${id}`;
+
+        // Fetch data with POST request
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: new Headers({
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'text/plain'
+            }),
+            body: noidung
+        });
+
+        // Check response status
+        if (res.ok) {
+            const result = await res.json();
+            toastr.success("Cập nhật thành công");
+            // Update DOM element only if feedback is present in the response
+            if (result.feedBack) {
+                document.getElementById("phanhoidiv" + id).innerHTML = result.feedBack;
+            }
+            $("#exampleModal").modal('hide');
+        } else {
+            // Handle non-2xx status codes
+            const errorData = await res.json();
+            const errorMessage = errorData.defaultMessage || 'Lỗi cập nhật phản hồi.';
+            toastr.error(errorMessage);
         }
-        else{
-            toastr.error("Thất bại");
-        }
+    } catch (error) {
+        console.error('Error updating feedback:', error);
+        toastr.error('Không thể cập nhật phản hồi. vì buổi tập nghỉ hoặc quá hạn');
     }
 }
 

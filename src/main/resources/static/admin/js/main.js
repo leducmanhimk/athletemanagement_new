@@ -1,5 +1,5 @@
-var token = sessionStorage.getItem("token");
-var user = sessionStorage.getItem("user");
+var token = localStorage.getItem("token");
+var user = localStorage.getItem("user");
 var exceptionCode = 417
 if(user != null){
     user = JSON.parse(user)
@@ -24,7 +24,7 @@ $( document ).ready(function() {
 
     var header = 
     `<div class="ctnheader"><div class="lichheader">
-        <img class="iconlich" src="../image/lich.png">
+        <img class="iconlich" src="/image/lich.png">
         <p class="text-uppercase fw-weight-bold mb-0 ngayhomnay">
             <script language="javascript">
                 document.write(day_name);
@@ -71,15 +71,15 @@ $( document ).ready(function() {
 });
 
 function dangXuat(){
-    window.sessionStorage.removeItem('user')
-    window.sessionStorage.removeItem('token')
+    window.localStorage.removeItem('user')
+    window.localStorage.removeItem('token')
     window.location.replace('../login');
 }
 
 async function checkroleAdmin() {
-    var token = sessionStorage.getItem("token");
+    var token = localStorage.getItem("token");
     if(token == null){
-        window.location.replace('../login')
+        window.location.replace('/login')
         return;
     }
     var url = 'http://localhost:8080/api/user/admin/check-role-admin';
@@ -90,7 +90,7 @@ async function checkroleAdmin() {
         })
     });
     if (response.status > 300) {
-        window.location.replace('../login')
+        window.location.replace('/login')
     }
 }
 

@@ -1,5 +1,5 @@
-var token = sessionStorage.getItem("token");
-var user = sessionStorage.getItem("user");
+var token = localStorage.getItem("token");
+var user = localStorage.getItem("user");
 var exceptionCode = 417
 var avat = '../image/user.svg'
 if(user != null){
@@ -70,8 +70,8 @@ $( document ).ready(function() {
 });
 
 function dangXuat(){
-    window.sessionStorage.removeItem('user')
-    window.sessionStorage.removeItem('token')
+    window.localStorage.removeItem('user')
+    window.localStorage.removeItem('token')
     window.location.replace('../login');
 }
 
@@ -114,7 +114,7 @@ async function changePassword() {
 }
 
 async function checkroleChuyenGia() {
-    var token = sessionStorage.getItem("token");
+    var token = localStorage.getItem("token");
     if(token == null){
         window.location.replace('../login')
         return;

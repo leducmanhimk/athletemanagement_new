@@ -31,7 +31,13 @@ async function loadAllThuChi() {
                 </tr>`
     }
     document.getElementById("listthuchi").innerHTML = main
-    $('#example').DataTable();
+    $('#example').DataTable({
+        layout: {
+            topStart: {
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            }
+        }
+    });
 }
 
 

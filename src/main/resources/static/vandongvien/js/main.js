@@ -70,8 +70,8 @@ $( document ).ready(function() {
 });
 
 function dangXuat(){
-    window.sessionStorage.removeItem('user')
-    window.sessionStorage.removeItem('token')
+    window.localStorage.removeItem('user')
+    window.localStorage.removeItem('token')
     window.location.replace('../login');
 }
 

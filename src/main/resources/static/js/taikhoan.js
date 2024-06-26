@@ -13,8 +13,8 @@ async function dangNhap() {
     });
     var result = await response.json();
     if (response.status < 300) {
-        sessionStorage.setItem("user", JSON.stringify(result.user));
-        sessionStorage.setItem("token", result.token);
+        localStorage.setItem("user", JSON.stringify(result.user));
+        localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
         localStorage.setItem("token", result.token);
         if (result.user.role === "ROLE_ADMIN") {

@@ -17,7 +17,7 @@ async function loadAllVdv() {
                     <td>${list[i].user.email}</td>
                     <td>${list[i].user.fullName}</td>
                     <td>${list[i].user.phone}</td>
-                    <td>${list[i].user.createdDate}</td>
+                    <td>${list[i].dob}</td>
                     <td>${list[i].specialize.name}</td>
                     <td>
                          <span class="pointer" data-bs-toggle="modal" data-bs-target="#modalkehoachhl" onclick="loadAllKeHoach(${list[i].id})">Xem</span><br>
@@ -169,6 +169,7 @@ async function loadHoSoVdv() {
             datap += Number(1);
         }
     }
+
     document.getElementById("listlichtap").innerHTML = main
     document.getElementById("tongbuoitap").innerHTML = " "+list.length
     document.getElementById("datap").innerHTML = " "+datap
@@ -286,3 +287,4 @@ function calBmi(cannang, chieucao){
     bmi = bmi.toFixed(2)
     return bmi
 }
+

@@ -31,6 +31,7 @@ async function loadAllVdv() {
         layout: {
             topStart: {
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+
             }
         },
         language: {
@@ -41,6 +42,7 @@ async function loadAllVdv() {
                 next: "Sau"
             }
         }
+
     });
 }
 

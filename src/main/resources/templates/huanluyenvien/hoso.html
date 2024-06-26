@@ -97,7 +97,7 @@
                         <span class="lbusers">Nghỉ</span>
                     </div>
                 </div>
-                <table class="table table-borderless" style="margin-top: 20px;">
+                <table id="scheTable" class="table table-borderless" style="margin-top: 20px;">
                     <thead>
                         <tr>
                             <th>Ngày</th>
@@ -168,6 +168,13 @@
 
 <div id="divdoimk"></div>
 <script>
+
+
     $('#example').DataTable();
+    const today = new Date();
+    const todayString = today.toISOString().slice(0, 10); // Lấy ngày ở định dạng YYYY-MM-DD
+
+    document.getElementById('start').value = todayString;
+    document.getElementById('end').value = todayString;
 </script>
 </html>

@@ -155,6 +155,7 @@ public class UserApi {
     @GetMapping("/coach/check-role-coach")
     public void checkRoleCoach(){
         System.out.println("coach");
+        System.out.println("admin");
     }
 
     @GetMapping("/expert/check-role-expert")

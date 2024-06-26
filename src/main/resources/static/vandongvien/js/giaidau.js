@@ -17,12 +17,11 @@ async function loadAllGiaiDau() {
     var main = '';
     for (i = 0; i < list.length; i++) {
         var btndki = '';
+
         if(list[i].daDangKy != true && list[i].lockRegis != true){
             btndki = `<br><br><span onclick="sendRequest(${list[i].id})" class="btn btn-primary pointer"><i class="fa fa-edit"></i> Đăng ký</span>`;
         }
-        if(list[i].daDangKy == true){
-            btndki = `<br><br><span onclick="huyDangKy(${list[i].id})" class="btn btn-danger pointer"><i class="fa fa-remove"></i> Hủy đăng ký</span>`
-        }
+
         main += `<tr>
                     <td>${list[i].name}</td>
                     <td>${list[i].createdDate}</td>
@@ -110,10 +109,13 @@ async function loadGiaiDauDaDangKy() {
     for (i = 0; i < list.length; i++) {
         main += `<tr>
                     <td>${list[i].createdDate}</td>
-                    <td>${list[i].accepted == true?'<span class="green">Đã xác nhận</span>':'<span class="red">Chưa xác nhận</span>'}</td>
+                    <td>${list[i].tournament.name}</td>        
+                    <td>${list[i].accepted === true?'<span class="green">Đã xác nhận</span>':'<span class="red">Chưa xác nhận</span>'}</td>
                     <td>${list[i].result == null?'Chưa có kết quả':list[i].result}</td>
                     <td>
-                    <span onclick="huyDangKy(${list[i].tournament.id})" class="btn btn-danger pointer"><i class="fa fa-remove"></i> Hủy đăng ký</span>
+                    <span onclick="huyDangKy(${list[i].tournament.id})" class="btn btn-danger pointer ${list[i].accepted === true ? 'disabled' : ''}">
+                    <i class="fa fa-remove"></i> Hủy đăng ký
+                    </span>                    
                     </td>
                 </tr>`
     }

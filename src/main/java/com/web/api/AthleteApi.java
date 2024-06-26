@@ -182,6 +182,23 @@ public class AthleteApi {
         athleteResponse.setSchedules(schedules);
         return athleteResponse;
     }
+    @GetMapping("/admin/full-infor")
+    public AthleteResponse AdminfullInfor(@RequestParam Long id){
+        AthleteResponse athleteResponse = new AthleteResponse();
+        Athlete athlete = athleteRepository.findById(id).get();
+        athleteResponse.setAthlete(athlete);
+        List<AthleteHistory> athleteHistories = athleteHistoryRepository.findByAthlete(athlete.getId());
+        athleteResponse.setAthleteHistories(athleteHistories);
+        List<TournamentAthlete> tournamentAthletes = tournamentAthleteRepository.findByUser(athlete.getUser().getId());
+        athleteResponse.setTournamentAthletes(tournamentAthletes);
+        List<Plan> plans = planRepository.findByAthlete(athlete.getId());
+        athleteResponse.setPlans(plans);
+        List<Injuries> injuries = injuriesRepository.findByAth(athlete.getId());
+        athleteResponse.setInjuries(injuries);
+        List<Schedule> schedules = scheduleRepository.findByAth(athlete.getId());
+        athleteResponse.setSchedules(schedules);
+        return athleteResponse;
+    }
 
     @GetMapping("/athlete/my-full-infor")
     public AthleteResponse myFullInfor(){

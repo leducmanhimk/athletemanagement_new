@@ -142,11 +142,23 @@ public class ScheduleApi {
     @PostMapping("/athlete/update-feedback")
     public ResponseEntity<?> updateFeedBack(@RequestBody String feedBack, @RequestParam Integer mark, @RequestParam Long id){
         Schedule schedule = scheduleRepository.findById(id).get();
-        schedule.setFeedBack(feedBack);
-        schedule.setMark(mark);
-        schedule.setFeedBackDate(LocalDateTime.now());
-        scheduleRepository.save(schedule);
-        return new ResponseEntity<>(schedule,HttpStatus.CREATED);
+        String status = String.valueOf(schedule.getStatus());
+        LocalDate scheduleDate = schedule.getWorkoutDate().toLocalDate(); // Giả sử ngày được lưu trữ dưới dạng LocalDate
+        // Kiểm tra xem ngày tập có nằm trong quá khứ hoặc tương lai hay không (loại trừ hôm nay)
+        if (scheduleDate.isBefore(LocalDate.now()) || scheduleDate.isAfter(LocalDate.now())) {
+            return new ResponseEntity<>("Chỉ có thể phản hồi cho lịch tập hôm nay", HttpStatus.BAD_REQUEST);
+        }
+
+        if (status.equals("DA_TAP") || status.equals("DI_MUON")){
+            schedule.setFeedBack(feedBack);
+            schedule.setMark(mark);
+            schedule.setFeedBackDate(LocalDateTime.now());
+            scheduleRepository.save(schedule);
+            return new ResponseEntity<>(schedule,HttpStatus.CREATED);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/coach/fin-feedback-by-date")
